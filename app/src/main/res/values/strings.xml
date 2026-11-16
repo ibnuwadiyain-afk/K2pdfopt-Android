@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">K2pdfopt</string>
+    <string name="app_tagline">Multilingual PDF &amp; DjVu Reflow, OCR &amp; E-Reader Optimizer</string>
+
+    <!-- Navigation Tabs -->
+    <string name="nav_home">Queue</string>
+    <string name="nav_preview">Editor</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_ocr">OCR Models</string>
+    <string name="nav_profiles">Profiles</string>
+    <string name="nav_reader">Reader</string>
+    <string name="nav_logs">Logs</string>
+    <string name="nav_about">About</string>
+
+    <!-- Home / Queue Screen -->
+    <string name="home_add_files">Add PDF / DjVu / Images</string>
+    <string name="home_generate_samples">Generate Test Corpus</string>
+    <string name="home_watch_folder">Watch Folder</string>
+    <string name="home_start_batch">Convert Queue</string>
+    <string name="home_pause_job">Pause</string>
+    <string name="home_resume_job">Resume</string>
+    <string name="home_cancel_job">Cancel</string>
+    <string name="home_optimize_this_phone">Optimize for This Phone</string>
+    <string name="home_auto_detect_doc">Auto-Detect Document Type</string>
+    <string name="home_empty_queue_title">No Documents in Queue</string>
+    <string name="home_empty_queue_subtitle">Import a PDF, DjVu, or scan via Storage Access Framework, or generate a multilingual test corpus to inspect real reflow, OCR, and layout detection.</string>
+    <string name="home_batch_report_title">Batch Conversion Report</string>
+    <string name="home_thermal_status_label">Device Thermal &amp; Battery State</string>
+    <string name="home_active_profile_format">Active Profile: %1$s (%2$s)</string>
+    <string name="home_page_quality_format">Quality Score: %1$d%% • OCR Confidence: %2$d%%</string>
+    <string name="home_low_quality_warning">Flagged %1$d low-scoring page(s) for review in the Overlay Editor.</string>
+
+    <!-- Document Auto-Detection -->
+    <string name="detect_type_book">Text-Only Book</string>
+    <string name="detect_type_journal">Two-Column Journal Article</string>
+    <string name="detect_type_scan">Scanned Document</string>
+    <string name="detect_type_slides">Presentation Slides</string>
+    <string name="detect_type_manual">Technical Manual</string>
+    <string name="detect_type_tables">Table-Heavy Report</string>
+    <string name="detect_accept_profile">Apply Recommended Profile</string>
+    <string name="detect_override_profile">Override</string>
+
+    <!-- Settings Screen & Groups -->
+    <string name="settings_search_hint">Search settings or CLI flags (-mode, -dpi, -col)…</string>
+    <string name="settings_group_device">Device Preset &amp; Dimensions</string>
+    <string name="settings_group_mode">Conversion Mode &amp; Columns</string>
+    <string name="settings_group_margins">Cropping &amp; Odd/Even Margins</string>
+    <string name="settings_group_image">Contrast, Gamma, Dither &amp; Scan Cleanup</string>
+    <string name="settings_group_ocr">Multilingual OCR &amp; Scripts</string>
+    <string name="settings_group_layout">AI Layout Model, Protected Blocks &amp; Footnotes</string>
+    <string name="settings_group_output">Output Format, Target Size &amp; Raw CLI</string>
+
+    <!-- Settings Items & Flag Tooltips (keep k2pdfopt flags untranslated) -->
+    <string name="setting_device_preset">Device Preset</string>
+    <string name="tooltip_device_preset">Select target reader screen dimensions and pixel density (-dev, -w, -h, -dpi).</string>
+    <string name="setting_conversion_mode">Conversion Mode (-mode)</string>
+    <string name="tooltip_conversion_mode">Maps to -mode (default, fw, 2col, copy, crop, tm, concat). Controls how columns and lines are unwrapped.</string>
+    <string name="setting_max_columns">Max Columns (-col)</string>
+    <string name="tooltip_max_columns">Maps to -col (1, 2, 4). Maximum number of columns detected per page.</string>
+    <string name="setting_wrap_text">Reflow &amp; Wrap Text (-wrap)</string>
+    <string name="tooltip_wrap_text">Maps to -wrap+ / -wrap-. Unwraps lines to fit the target screen width.</string>
+    <string name="setting_hyphenation">Keep Hyphenation (-hy)</string>
+    <string name="tooltip_hyphenation">Maps to -hy+ / -hy-. Preserves or strips line-end hyphens during text wrapping.</string>
+    <string name="setting_justification">Text Justification (-j)</string>
+    <string name="tooltip_justification">Maps to -j (-1 auto, 0 left, 1 center, 2 right, 3 full justification).</string>
+    <string name="setting_rtl_mode">Right-to-Left Reading Order (-r2l)</string>
+    <string name="tooltip_rtl_mode">Maps to -r2l+ / -r2l-. Enables RTL word and column progression for Arabic, Persian, Urdu, and Hebrew.</string>
+    <string name="setting_vertical_cjk">Vertical CJK Text Layout</string>
+    <string name="tooltip_vertical_cjk">Enables right-to-left vertical column segmentation and CJK character spacing without Latin word gaps.</string>
+    <string name="setting_auto_crop">Auto-Crop Margin Threshold (-ac)</string>
+    <string name="tooltip_auto_crop">Maps to -ac. Automatically trims noisy borders and scanning artifacts.</string>
+    <string name="setting_odd_even_margins">Odd / Even Page Margins (-ml, -mr)</string>
+    <string name="tooltip_odd_even_margins">Maps to -ml, -mt, -mr, -mb with distinct gutter offsets for odd and even book pages.</string>
+    <string name="setting_contrast">Contrast Adjustment (-c)</string>
+    <string name="tooltip_contrast">Maps to -c. Increases foreground darkness relative to paper background.</string>
+    <string name="setting_gamma">Gamma Correction (-g)</string>
+    <string name="tooltip_gamma">Maps to -g. Values below 1.0 darken anti-aliased glyphs for crisp e-ink display.</string>
+    <string name="setting_sharpen">Sharpen Glyphs (-sh)</string>
+    <string name="tooltip_sharpen">Maps to -sh+ / -sh-. Applies unsharp masking to blurred scans.</string>
+    <string name="setting_dither">Floyd-Steinberg Dithering (-d)</string>
+    <string name="tooltip_dither">Maps to -d+ / -d-. Tunes grayscale halftoning for 1-bit, 2-bit, or 4-bit e-ink panels (-bpc).</string>
+    <string name="setting_scan_cleanup">Leptonica Scan Cleanup (-as)</string>
+    <string name="tooltip_scan_cleanup">Applies Leptonica deskew (-as+), morphological despeckle, background whitening, and Sauvola shadow removal before reflow.</string>
+    <string name="setting_dark_eink">Intelligent Dark &amp; E-Ink Inversion (-neg)</string>
+    <string name="tooltip_dark_eink">Maps to -neg / -neg+. Inverts page polarity while keeping figures legible.</string>
+    <string name="setting_layout_engine">On-Device Layout Detector</string>
+    <string name="tooltip_layout_engine">Uses bundled neural layout detector (with classic k2pdfopt projection-profile fallback) to tag text, tables, figures, captions, equations, and footnotes.</string>
+    <string name="setting_protected_blocks">Protected Tables, Figures &amp; Equations</string>
+    <string name="tooltip_protected_blocks">Prevents splitting or reflowing tables, figures, and inline math formulas; offers scale-to-fit or keep-as-image.</string>
+    <string name="setting_smart_footnotes">Smart Footnote Placement</string>
+    <string name="tooltip_smart_footnotes">Moves detected footnotes to the end of the citing paragraph, end of section, or keeps them in place.</string>
+    <string name="setting_target_size">Target File Size Limit (KB)</string>
+    <string name="tooltip_target_size">Iteratively tunes output DPI (-dpi) and bits-per-pixel (-bpc) to meet your target file size budget.</string>
+    <string name="setting_output_format">Output Format</string>
+    <string name="tooltip_output_format">Exports searchable PDF, PNG/JPEG images, reflowable EPUB 3, semantic HTML5, Markdown, or UTF-8 TXT.</string>
+    <string name="setting_raw_cli">Raw Command-Line Flags</string>
+    <string name="tooltip_raw_cli">Pass any desktop k2pdfopt CLI flags directly to the native option parser (-mode, -dpi, -col, -ocr, -ocrlang).</string>
+
+    <!-- Preview & Interactive Overlay Editor -->
+    <string name="preview_before_after">Before / After Split</string>
+    <string name="preview_overlay_editor">Overlay Editor</string>
+    <string name="preview_thumbnails">Page Grid</string>
+    <string name="preview_add_region">Add Crop / Block Box</string>
+    <string name="preview_reset_overrides">Reset Page Overrides</string>
+    <string name="preview_save_overrides">Save Overrides for Page %1$d</string>
+    <string name="preview_page_override_lang">Page OCR Language Override</string>
+
+    <!-- Language Manager (Tesseract 5) -->
+    <string name="ocr_search_languages">Search 100+ Tesseract 5 languages by English or native name…</string>
+    <string name="ocr_storage_summary">Installed Models: %1$d • Total Storage Used: %2$s</string>
+    <string name="ocr_quality_fast">Fast (Compact Integer LSTM — Faster speed, smaller size)</string>
+    <string name="ocr_quality_best">Best (Float32 LSTM — Highest accuracy on dense or historical fonts)</string>
+    <string name="ocr_import_traineddata">Import Custom .traineddata</string>
+    <string name="ocr_auto_detect_script">Auto-Detect Page Script &amp; OSD</string>
+    <string name="ocr_selected_priority">Active Multi-Language Priority (-ocrlang): %1$s</string>
+    <string name="ocr_download">Download</string>
+    <string name="ocr_delete">Delete</string>
+    <string name="ocr_resume">Resume</string>
+    <string name="ocr_verified_checksum">SHA-256 Verified</string>
+
+    <!-- Profiles Screen -->
+    <string name="profiles_create_new">Save Current Settings as Profile</string>
+    <string name="profiles_import_json">Import Profile JSON</string>
+    <string name="profiles_export_json">Share / Export JSON</string>
+    <string name="profiles_scientific_preset">Scientific &amp; Medical Journal Preset</string>
+
+    <!-- Built-In Reader & Offline TTS -->
+    <string name="reader_night_mode">Night Mode</string>
+    <string name="reader_tts_play">Read Aloud (Offline TTS)</string>
+    <string name="reader_tts_stop">Stop TTS</string>
+    <string name="reader_tts_skip_headers">Skipping Headers &amp; Footers</string>
+    <string name="reader_tts_missing_voice">No offline system TTS voice is installed for %1$s (%2$s). Tap to open Android TTS Voice Settings; K2pdfopt never fakes or substitutes another language voice.</string>
+    <string name="reader_open_tts_settings">Install Voice in System Settings</string>
+    <string name="reader_position_saved">Saved Page %1$d of %2$d</string>
+
+    <!-- Logs & Crash Recovery -->
+    <string name="logs_native_stdout">Native k2pdfopt &amp; JNI Engine Stream</string>
+    <string name="logs_clear">Clear Log</string>
+    <string name="logs_copy">Copy Log</string>
+    <string name="logs_crash_recovery_title">Isolated Worker Process Recovery</string>
+    <string name="logs_crash_recovery_desc">Conversion runs in :k2worker so native signals never terminate the UI. Last worker status: %1$s</string>
+
+    <!-- About & AGPLv3 Compliance -->
+    <string name="about_license_title">GNU Affero General Public License v3.0 (AGPL-3.0)</string>
+    <string name="about_credits_body">Port of Willus.com\'s K2pdfopt v2.55 by Willus (willus.com/k2pdfopt). Linked with MuPDF (Artifex), Leptonica (Dan Bloomberg), Tesseract 5 LSTM OCR (Google / Apache 2.0), DjVuLibre (GPLv2+), FreeType, HarfBuzz, libjpeg-turbo, libpng, and zlib.</string>
+    <string name="about_source_link">Source Code, Patch Set &amp; Build Instructions</string>
+    <string name="about_translation_status">Translation Review Status</string>
+    <string name="about_ui_language_picker">In-App Interface Language</string>
+
+    <!-- Notifications & Errors -->
+    <string name="notif_channel_name">K2pdfopt Conversion Jobs</string>
+    <string name="notif_converting_title">Converting %1$s (%2$d/%3$d)</string>
+    <string name="error_invalid_file">Unable to read input document: %1$s</string>
+    <string name="error_checksum_mismatch">Checksum verification failed for %1$s. Download can be resumed safely.</string>
+
+    <!-- Plurals (handled across all languages including Arabic 6-form and Russian 4-form) -->
+    <plurals name="plural_pages_processed">
+        <item quantity="one">%1$d page processed</item>
+        <item quantity="other">%1$d pages processed</item>
+    </plurals>
+    <plurals name="plural_files_queued">
+        <item quantity="one">%1$d file in batch queue</item>
+        <item quantity="other">%1$d files in batch queue</item>
+    </plurals>
+    <plurals name="plural_low_score_pages">
+        <item quantity="one">%1$d page flagged for low quality score</item>
+        <item quantity="other">%1$d pages flagged for low quality score</item>
+    </plurals>
+</resources>

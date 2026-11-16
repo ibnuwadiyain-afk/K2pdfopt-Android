@@ -1,0 +1,6 @@
+{
+  "name": "K2pdfopt",
+  "description": "Multilingual PDF & DjVu reflow, OCR (Tesseract 5), layout analysis, e-reader optimization, and EPUB/HTML exporter for Android",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

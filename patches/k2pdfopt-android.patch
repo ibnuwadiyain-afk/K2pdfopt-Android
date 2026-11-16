@@ -1,0 +1,90 @@
+--- a/k2pdfoptlib/k2pdfopt.h
++++ b/k2pdfoptlib/k2pdfopt.h
+@@ -42,6 +42,32 @@
+ #include <willus.h>
+ 
++#ifdef __ANDROID__
++typedef void (*k2android_log_fn)(int level, const char *message, void *userdata);
++typedef void (*k2android_progress_fn)(int current_page, int total_pages, float page_quality, const char *stage, void *userdata);
++typedef int  (*k2android_control_fn)(void *userdata); /* 0=continue, 1=pause, 2=cancel */
++
++typedef struct {
++    int page_number;
++    int block_type;       /* 0=TEXT, 1=TABLE, 2=FIGURE, 3=EQUATION, 4=CAPTION, 5=FOOTNOTE */
++    double x0, y0, x1, y1;
++    int reading_order;
++    int script_dir;       /* 0=LTR, 1=RTL, 2=CJK_VERT_RL */
++    int protect_policy;   /* 0=REFLOW, 1=SCALE_TO_FIT, 2=KEEP_AS_IMAGE */
++    char lang_code[64];
++} K2AndroidRegionHint;
++
++void k2pdfopt_set_android_callbacks(
++    k2android_log_fn log_cb,
++    k2android_progress_fn progress_cb,
++    k2android_control_fn control_cb,
++    void *userdata
++);
++void k2pdfopt_set_region_hints(const K2AndroidRegionHint *hints, int count);
++#endif
++
+--- a/k2pdfoptlib/k2sys.c
++++ b/k2pdfoptlib/k2sys.c
+@@ -18,12 +18,41 @@
+ #include "k2pdfopt.h"
+ 
++#ifdef __ANDROID__
++static k2android_log_fn g_log_cb = NULL;
++static k2android_progress_fn g_progress_cb = NULL;
++static k2android_control_fn g_control_cb = NULL;
++static void *g_cb_userdata = NULL;
++
++void k2pdfopt_set_android_callbacks(
++    k2android_log_fn log_cb,
++    k2android_progress_fn progress_cb,
++    k2android_control_fn control_cb,
++    void *userdata
++) {
++    g_log_cb = log_cb;
++    g_progress_cb = progress_cb;
++    g_control_cb = control_cb;
++    g_cb_userdata = userdata;
++}
++#endif
++
+ void k2printf(const char *fmt, ...) {
+     va_list args;
+     va_start(args, fmt);
++#ifdef __ANDROID__
++    if (g_log_cb) {
++        char buf[2048];
++        vsnprintf(buf, sizeof(buf), fmt, args);
++        g_log_cb(0, buf, g_cb_userdata);
++        va_end(args);
++        return;
++    }
++#endif
+     vprintf(fmt, args);
+     va_end(args);
+ }
+--- a/k2pdfoptlib/k2proc.c
++++ b/k2pdfoptlib/k2proc.c
+@@ -214,6 +214,29 @@
+     /* Check Android pause/cancel state before processing each source region */
++#ifdef __ANDROID__
++    if (g_control_cb) {
++        int ctl = g_control_cb(g_cb_userdata);
++        if (ctl == 2) {
++            k2printf("Conversion cancelled by user at page %d.\n", page_index);
++            return K2_ERR_CANCELLED;
++        }
++    }
++    /* Respect protected block hints (tables, figures, inline equations) */
++    if (k2_region_is_protected(page_index, region_box)) {
++        k2bmp_copy_scaled_region(dst_bmp, src_bmp, region_box, k2settings->dst_dpi);
++        return 0;
++    }
++    /* Handle CJK vertical right-to-left column order when vertical_cjk is set */
++    if (k2settings->vertical_cjk) {
++        k2_sort_columns_vertical_rl(page_regions);
++    }
++#endif
